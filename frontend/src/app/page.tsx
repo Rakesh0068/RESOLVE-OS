@@ -16,161 +16,407 @@ export default function LandingPage() {
   }, [user, loading, router]);
 
   return (
-    <div className="min-h-screen">
-      {/* Nav */}
-      <nav className="fixed top-0 w-full z-50 border-b border-[var(--border-subtle)] bg-[var(--bg-primary)]/80 backdrop-blur-xl">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-[var(--radius-md)] bg-[var(--blue-500)] flex items-center justify-center font-bold text-white text-sm">R</div>
-            <span className="font-semibold text-lg">ResolveOS</span>
+    <div style={{ minHeight: "100vh", background: "var(--bg-primary)", color: "var(--text-primary)" }}>
+
+      {/* ── Navigation ── */}
+      <nav style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+        borderBottom: "1px solid var(--border-subtle)",
+        background: "rgba(5,8,22,0.85)", backdropFilter: "blur(16px)",
+      }}>
+        <div style={{
+          maxWidth: 1100, margin: "0 auto", padding: "0 24px",
+          height: 60, display: "flex", alignItems: "center", justifyContent: "space-between",
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{
+              width: 30, height: 30, borderRadius: 7,
+              background: "var(--blue-500)", display: "flex",
+              alignItems: "center", justifyContent: "center",
+              fontWeight: 800, color: "#fff", fontSize: 14,
+            }}>R</div>
+            <span style={{ fontWeight: 700, fontSize: 16, letterSpacing: "-0.3px" }}>ResolveOS</span>
           </div>
-          <div className="flex items-center gap-4">
-            <Link href="/signin" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Sign in</Link>
-            <Link href="/signup" className="text-sm font-medium bg-[var(--blue-500)] hover:bg-[var(--blue-400)] text-white px-4 py-2 rounded-[var(--radius-md)] transition-colors">Start resolving</Link>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <Link href="/signin" style={{
+              fontSize: 13, color: "var(--text-secondary)", textDecoration: "none",
+              transition: "color 0.15s",
+            }}
+              onMouseEnter={e => (e.currentTarget.style.color = "var(--text-primary)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "var(--text-secondary)")}
+            >
+              Sign in
+            </Link>
+            <Link href="/signup" style={{
+              fontSize: 13, fontWeight: 600,
+              background: "var(--blue-500)", color: "#fff",
+              padding: "8px 18px", borderRadius: 6,
+              textDecoration: "none", transition: "background 0.15s",
+            }}
+              onMouseEnter={e => (e.currentTarget.style.background = "var(--blue-400)")}
+              onMouseLeave={e => (e.currentTarget.style.background = "var(--blue-500)")}
+            >
+              Start resolving →
+            </Link>
           </div>
         </div>
       </nav>
 
-      {/* Hero — Product-driven layout per §5-6 */}
-      <section className="pt-32 pb-24 px-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* LEFT: Operational copy */}
+      {/* ── Hero ── */}
+      <section style={{ paddingTop: 100, paddingBottom: 80, padding: "100px 24px 80px" }}>
+        <div style={{
+          maxWidth: 1100, margin: "0 auto",
+          display: "grid", gridTemplateColumns: "1fr 1fr",
+          gap: 64, alignItems: "center",
+        }}>
+
+          {/* LEFT: Copy */}
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--blue-950)] border border-[var(--blue-500)]/20 text-[var(--blue-400)] text-xs font-medium mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--blue-400)] animate-pulse-subtle" />
-              Autonomous operations
+            <div style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              padding: "4px 12px", borderRadius: 20,
+              background: "rgba(79,124,255,0.08)",
+              border: "1px solid rgba(79,124,255,0.2)",
+              color: "var(--blue-400)", fontSize: 11, fontWeight: 600,
+              letterSpacing: "0.05em", textTransform: "uppercase",
+              marginBottom: 20,
+            }}>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--blue-400)", display: "inline-block" }} />
+              AWS Strands Agents · Autonomous Operations
             </div>
-            <h1 className="text-2xl md:text-3xl font-bold tracking-tight leading-[1.25] mb-4">
-              Give ResolveOS an outcome
+
+            <h1 style={{
+              fontSize: "clamp(28px, 4vw, 44px)",
+              fontWeight: 800, lineHeight: 1.15,
+              letterSpacing: "-0.03em", marginBottom: 20,
+              color: "var(--text-primary)",
+            }}>
+              Don&apos;t manage tasks.
+              <br />
+              <span style={{
+                background: "linear-gradient(135deg, var(--blue-400), var(--indigo-400), var(--violet-400))",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}>
+                Resolve outcomes.
+              </span>
             </h1>
-            <p className="text-base md:text-lg text-[var(--text-secondary)] leading-relaxed mb-6">
-              ResolveOS investigates operational problems, takes permitted actions, monitors what happens, and escalates only when a decision actually requires you.
+
+            <p style={{
+              fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.7,
+              marginBottom: 32, maxWidth: 480,
+            }}>
+              ResolveOS investigates operational problems, plans actions, executes
+              permitted work, monitors what happens, replans when reality changes,
+              and verifies the final outcome. Powered by AWS Strands Agents.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/signup" className="flex-1 h-10 px-4 bg-[var(--blue-500)] hover:bg-[var(--blue-400)] text-white font-medium rounded-md transition-colors text-center">
-                Resolve this
+
+            <div style={{ display: "flex", gap: 12 }}>
+              <Link href="/signup" style={{
+                display: "inline-flex", alignItems: "center", gap: 6,
+                height: 44, padding: "0 24px", borderRadius: 7,
+                background: "var(--blue-500)", color: "#fff",
+                fontWeight: 600, fontSize: 14, textDecoration: "none",
+                transition: "background 0.15s",
+              }}
+                onMouseEnter={e => (e.currentTarget.style.background = "var(--blue-400)")}
+                onMouseLeave={e => (e.currentTarget.style.background = "var(--blue-500)")}
+              >
+                Resolve an outcome
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </Link>
-              <a href="#how-it-works" className="h-10 border border-[var(--border-subtle)] hover:border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium rounded-md transition-colors text-center">
-                How it works
-              </a>
+              <Link href="/signin" style={{
+                display: "inline-flex", alignItems: "center", height: 44,
+                padding: "0 20px", borderRadius: 7,
+                border: "1px solid var(--border-default)",
+                color: "var(--text-secondary)", fontSize: 14, fontWeight: 500,
+                textDecoration: "none", transition: "all 0.15s",
+              }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--border-strong)"; e.currentTarget.style.color = "var(--text-primary)"; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border-default)"; e.currentTarget.style.color = "var(--text-secondary)"; }}
+              >
+                See how it works
+              </Link>
             </div>
           </div>
 
-          {/* RIGHT: Actual product preview per §6 */}
-          <div className="relative">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--bg-secondary)] rounded-[var(--radius-lg)] overflow-hidden opacity-80">
-              <svg className="w-full h-full" viewBox="0 0 200 160" fill="none">
-                <rect width="200" height="160" rx="12" fill="var(--bg-tertiary)" />
-                <rect width="80" height="40" x="60" y="60" rx="6" fill="var(--blue-500)" />
-                <text x="100" y="95" text-anchor="middle" font-family="var(--font-geist-sans)" font-size="11" fill="var(--text-primary)">Case</text>
-                <text x="100" y="110" text-anchor="middle" font-family="var(--font-geist-sans)" font-size="11" fill="var(--text-secondary)">Panel</text>
-              </svg>
-            </div>
-            <div className="absolute inset-0 bg-[var(--bg-primary)] rounded-[var(--radius-lg)] overflow-hidden">
-              <div className="absolute top-4 left-4">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--bg-tertiary)] border border-[var(--border-subtle)]">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[var(--amber-500)]" />
-                  <span className="text-sm text-[var(--text-secondary)]">12m ago</span>
-                </div>
-                <div className="mt-2 text-xs text-[var(--text-muted)]">Inventory risk detected</div>
-              </div>
-              <div className="absolute bottom-4 right-4">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--bg-tertiary)] border border-[var(--border-subtle)]">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[var(--green-500)]" />
-                  <span className="text-sm text-[var(--text-secondary)]">Monitoring</span>
-                </div>
-                <div className="mt-2 text-xs text-[var(--text-muted)]">Stock safe</div>
-              </div>
-            </div>
-          </div>
+          {/* RIGHT: Outcome Core — CSS/SVG visualization (always visible) */}
+          <OutcomeCore />
         </div>
       </section>
 
-      {/* How it works — condensed per §7 */}
-      <section id="how-it-works" className="py-16 px-6 border-t border-[var(--border-subtle)]">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-xl font-bold text-center mb-3">How it works</h2>
-          <p className="text-[var(--text-secondary)] text-center mb-8">Give an outcome. ResolveOS handles the operational workflow.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {[{"step": "01", "title": "Give outcome", "desc": "Tell ResolveOS what you need. Not how to do it."}, {"step": "02", "title": "Agent investigates", "desc": "The agent analyzes your business, checks inventory, contacts suppliers, evaluates options."}, {"step": "03", "title": "Agent acts", "desc": "Within your policies, it executes actions. It asks you only when your decision matters."}].map((item) => (
-              <div key={item.step} className="bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-lg p-5 text-center">
-                <div className="text-3xl mb-3 opacity-40">{item.step}</div>
-                <h3 className="font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-[var(--text-secondary)]">{item.desc}</p>
+      {/* ── How it works ── */}
+      <section id="how-it-works" style={{
+        padding: "72px 24px",
+        borderTop: "1px solid var(--border-subtle)",
+        background: "var(--bg-secondary)",
+      }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--blue-400)", textAlign: "center", marginBottom: 12 }}>
+            Autonomous workflow
+          </p>
+          <h2 style={{ fontSize: 24, fontWeight: 700, textAlign: "center", marginBottom: 8 }}>How ResolveOS works</h2>
+          <p style={{ color: "var(--text-secondary)", textAlign: "center", marginBottom: 48, fontSize: 14 }}>
+            Give an outcome. The agent handles the rest.
+          </p>
+          <div style={{ display: "flex", gap: 0, alignItems: "flex-start", overflowX: "auto" }}>
+            {[
+              { step: "01", title: "Outcome Contract", desc: "Define a goal, success condition, budget, and deadline. This becomes the source of truth.", color: "var(--blue-400)" },
+              { step: "02", title: "Investigation", desc: "InvestigatorAgent checks inventory, supplier history, purchase orders. No invented data.", color: "var(--indigo-400)" },
+              { step: "03", title: "Planning", desc: "PlannerAgent creates a structured execution plan based on real evidence from tools.", color: "var(--violet-400)" },
+              { step: "04", title: "Human Gate", desc: "When an action exceeds ₹10,000 or is irreversible, execution pauses for your approval.", color: "var(--amber-400)" },
+              { step: "05", title: "Action + Verify", desc: "ActionAgent executes. VerificationAgent proves the outcome was actually achieved.", color: "var(--green-400)" },
+            ].map((item, i) => (
+              <div key={item.step} style={{ flex: 1, minWidth: 160, padding: "0 16px", position: "relative" }}>
+                {i < 4 && (
+                  <div style={{
+                    position: "absolute", top: 20, right: -1, width: 2, height: 2,
+                    borderTop: "1px dashed var(--border-default)", transform: "translateY(-50%)",
+                    width: "100%",
+                  }} />
+                )}
+                <div style={{
+                  width: 40, height: 40, borderRadius: "50%",
+                  border: `1.5px solid ${item.color}`,
+                  background: `color-mix(in srgb, ${item.color} 10%, transparent)`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: 11, fontWeight: 700, color: item.color,
+                  marginBottom: 12,
+                }}>
+                  {item.step}
+                </div>
+                <h3 style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>{item.title}</h3>
+                <p style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.6 }}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Outcome vs Task */}
-      <section className="py-16 px-6 border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)]">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-xl font-bold text-center mb-3">Outcome > Task</h2>
-          <p className="text-[var(--text-secondary)] text-center mb-8">Traditional task management makes you the coordinator. ResolveOS makes you the decision-maker.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            <div className="bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-lg p-6">
-              <div className="text-xs font-semibold uppercase tracking-wider text-[var(--red-400)] mb-3">Traditional</div>
-              <ul className="text-sm text-[var(--text-tertiary)] space-y-2">
-                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--border-subtle)] flex items-center justify-center text-[8px]">1</span> Create task</li>
-                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--border-subtle)] flex items-center justify-center text-[8px]">2</span> Assign task</li>
-                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--border-subtle)] flex items-center justify-center text-[8px]">3</span> Track task</li>
-                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--border-subtle)] flex items-center justify-center text-[8px]">4</span> Follow up</li>
-                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--border-subtle)] flex items-center justify-center text-[8px]">5</span> Check result</li>
-              </ul>
-            </div>
-            <div className="bg-[var(--bg-primary)] border border-[var(--green-500)]/20 rounded-lg p-6">
-              <div className="text-xs font-semibold uppercase tracking-wider text-[var(--green-400)] mb-3">ResolveOS</div>
-              <ul className="text-sm text-[var(--text-primary)] space-y-2">
-                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--green-500)]/10 border border-[var(--green-500)]/20 flex items-center justify-center text-[var(--green-400)] text-[8px]">✓</span> Give outcome</li>
-                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--green-500)]/10 border border-[var(--green-500)]/20 flex items-center justify-center text-[var(--green-400)] text-[8px]">✓</span> Agent handles workflow</li>
-                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--green-500)]/10 border border-[var(--green-500)]/20 flex items-center justify-center text-[var(--green-400)] text-[8px]">✓</span> Agent monitors</li>
-                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--green-500)]/10 border border-[var(--green-500)]/20 flex items-center justify-center text-[var(--green-400)] text-[8px]">✓</span> Agent verifies</li>
-                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--green-500)]/10 border border-[var(--green-500)]/20 flex items-center justify-center text-[var(--green-400)] text-[8px]">✓</span> Human intervenes only when needed</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Key sections as compact info, not feature cards */}
-      <section className="py-16 px-6 border-t border-[var(--border-subtle)]">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-xl font-bold text-center mb-4">What ResolveOS handles</h2>
-          <p className="text-[var(--text-secondary)] text-center mb-6">Built for real operations</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[{"title": "Stockout prevention", "desc": "Detects inventory shortage risk, compares suppliers, recommends action before stockout occurs"}, {"title": "Invoice discrepancy", "desc": "Identifies PO mismatches, contacts suppliers, processes corrections within policy limits"}, {"title": "Decision gates", "desc": "Pauses for approval when actions exceed autonomous limits (e.g., ₹10,000 purchase limit)"}, {"title": "Monitoring", "desc": "Tracks deliveries, supplier delays, risk levels. Escalates only when outcome threatened"}]} .map((f) => (
-              <div key={f.title} className="bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-lg p-5 flex items-start gap-3">
-                <div className="w-3 h-3 rounded-full flex-shrink-0">{f.title.includes("Stockout") ? "⚠" : f.title.includes("Invoice") ? "📄" : f.title.includes("Decision") ? "🔒" : "👁"}</div>
-                <div>
-                  <h3 className="font-medium mb-1">{f.title}</h3>
-                  <p className="text-sm text-[var(--text-secondary)]">{f.desc}</p>
-                </div>
+      {/* ── Demo scenario strip ── */}
+      <section style={{ padding: "64px 24px", borderTop: "1px solid var(--border-subtle)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 8 }}>Demo scenario</p>
+          <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 32 }}>Northstar Components — Stockout Prevention</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12 }}>
+            {[
+              { label: "Current stock", value: "120 units", sub: "Precision Bearing A", color: "var(--amber-400)" },
+              { label: "Daily usage", value: "40 units/day", sub: "Projected stockout: 3 days", color: "var(--red-400)" },
+              { label: "Supplier B", value: "₹44,500", sub: "100 units × ₹445 — Approval required", color: "var(--blue-400)" },
+              { label: "Human Gate", value: "Triggered", sub: "Exceeds ₹10,000 autonomous limit", color: "var(--amber-400)" },
+              { label: "Replan", value: "Activated", sub: "Supplier B delayed 2→5 days", color: "var(--red-400)" },
+              { label: "Resolution", value: "RESOLVED ✓", sub: "Verification passed", color: "var(--green-400)" },
+            ].map(item => (
+              <div key={item.label} style={{
+                background: "var(--bg-elevated)",
+                border: "1px solid var(--border-subtle)",
+                borderRadius: 8, padding: "16px 20px",
+              }}>
+                <div style={{ fontSize: 11, color: "var(--text-muted)", marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.06em" }}>{item.label}</div>
+                <div style={{ fontSize: 18, fontWeight: 700, color: item.color, marginBottom: 4 }}>{item.value}</div>
+                <div style={{ fontSize: 11, color: "var(--text-secondary)" }}>{item.sub}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 px-6 border-t border-[var(--border-subtle)]">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-3">Ready to resolve?</h2>
-          <p className="text-[var(--text-secondary)] mb-6">Give ResolveOS an outcome. It handles the work.</p>
-          <Link href="/signup" className="inline-flex h-10 px-6 bg-[var(--blue-500)] hover:bg-[var(--blue-400)] text-white font-medium rounded-md transition-colors items-center gap-2">
-            Give ResolveOS an outcome
-            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-          </Link>
+      {/* ── AWS Architecture ── */}
+      <section style={{
+        padding: "64px 24px",
+        borderTop: "1px solid var(--border-subtle)",
+        background: "var(--bg-secondary)",
+      }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>Powered by AWS Strands Agents</h2>
+          <p style={{ color: "var(--text-secondary)", fontSize: 13, marginBottom: 32, maxWidth: 560 }}>
+            Strands Agents SDK is the actual autonomous engine — not a wrapper or a cosmetic import.
+            Each specialized agent is a real <code style={{ background: "var(--bg-elevated)", padding: "1px 6px", borderRadius: 4, fontSize: 12 }}>strands.Agent</code> backed by Amazon Bedrock.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
+            {[
+              { name: "Strands Agents", role: "Agent orchestration", tag: "CORE" },
+              { name: "Amazon Bedrock", role: "Foundation model (Nova/Claude)", tag: "LLM" },
+              { name: "PlannerAgent", role: "Creates execution plans via LLM", tag: "AGENT" },
+              { name: "InvestigatorAgent", role: "Read-only fact gathering", tag: "AGENT" },
+              { name: "ActionAgent", role: "Executes approved actions", tag: "AGENT" },
+              { name: "VerificationAgent", role: "Proves outcome achieved", tag: "AGENT" },
+              { name: "Human Gate", role: "Deterministic approval pause", tag: "POLICY" },
+              { name: "DynamoDB", role: "Persistent case state", tag: "AWS" },
+            ].map(item => (
+              <div key={item.name} style={{
+                background: "var(--bg-elevated)", border: "1px solid var(--border-subtle)",
+                borderRadius: 7, padding: "14px 16px",
+              }}>
+                <div style={{
+                  fontSize: 9, fontWeight: 700, letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: item.tag === "CORE" ? "var(--blue-400)" : item.tag === "AGENT" ? "var(--indigo-400)" : item.tag === "POLICY" ? "var(--amber-400)" : "var(--green-400)",
+                  marginBottom: 6,
+                }}>{item.tag}</div>
+                <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 3 }}>{item.name}</div>
+                <div style={{ fontSize: 11, color: "var(--text-secondary)" }}>{item.role}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-[var(--border-subtle)] py-6 px-6">
-        <div className="max-w-6xl mx-auto flex items-center justify-between text-xs text-[var(--text-muted)]">
-          <span>ResolveOS</span>
-          <span>The Autonomous Operations Agent</span>
-        </div>
+      {/* ── CTA ── */}
+      <section style={{ padding: "72px 24px", textAlign: "center" }}>
+        <h2 style={{ fontSize: 28, fontWeight: 800, marginBottom: 12, letterSpacing: "-0.03em" }}>
+          Ready to resolve?
+        </h2>
+        <p style={{ color: "var(--text-secondary)", fontSize: 15, marginBottom: 32 }}>
+          Give ResolveOS an outcome. It handles the operational workflow.
+        </p>
+        <Link href="/signup" style={{
+          display: "inline-flex", alignItems: "center", gap: 8,
+          height: 48, padding: "0 32px", borderRadius: 8,
+          background: "var(--blue-500)", color: "#fff",
+          fontWeight: 700, fontSize: 15, textDecoration: "none",
+          boxShadow: "0 0 32px rgba(79,124,255,0.25)",
+        }}>
+          Get started
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </Link>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer style={{
+        borderTop: "1px solid var(--border-subtle)",
+        padding: "20px 24px",
+        display: "flex", justifyContent: "space-between", alignItems: "center",
+        maxWidth: 1100, margin: "0 auto",
+        fontSize: 12, color: "var(--text-muted)",
+      }}>
+        <span style={{ fontWeight: 600 }}>ResolveOS</span>
+        <span>Built for the AWS Strands Agents Hackathon</span>
       </footer>
+    </div>
+  );
+}
+
+
+/* ── Outcome Core visualization — pure CSS, always visible ── */
+function OutcomeCore() {
+  const nodes = [
+    { label: "PLAN",      angle: -90,  color: "#6366F1" },
+    { label: "EVIDENCE",  angle: -30,  color: "#4F7CFF" },
+    { label: "ACTION",    angle: 30,   color: "#34D399" },
+    { label: "VERIFY",    angle: 90,   color: "#8B5CF6" },
+    { label: "MONITOR",   angle: 150,  color: "#FBBF24" },
+    { label: "H.GATE",    angle: 210,  color: "#FB7185" },
+  ];
+
+  const r = 88; // orbit radius
+
+  return (
+    <div style={{
+      background: "var(--bg-elevated)",
+      border: "1px solid var(--border-subtle)",
+      borderRadius: 16, padding: 32,
+      display: "flex", flexDirection: "column", alignItems: "center",
+      boxShadow: "0 8px 40px rgba(0,0,0,0.5), inset 0 0 80px rgba(79,124,255,0.03)",
+      minHeight: 360,
+      position: "relative", overflow: "hidden",
+    }}>
+      {/* Background glow */}
+      <div style={{
+        position: "absolute", top: "50%", left: "50%",
+        transform: "translate(-50%,-50%)",
+        width: 240, height: 240, borderRadius: "50%",
+        background: "radial-gradient(circle, rgba(79,124,255,0.07) 0%, transparent 70%)",
+        pointerEvents: "none",
+      }} />
+
+      <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", color: "var(--text-muted)", marginBottom: 16, textTransform: "uppercase" }}>
+        Outcome Core
+      </div>
+
+      {/* SVG orbit diagram */}
+      <svg width="260" height="260" viewBox="-130 -130 260 260" style={{ overflow: "visible" }}>
+        {/* Orbit ring */}
+        <circle cx="0" cy="0" r={r} fill="none" stroke="rgba(79,124,255,0.12)" strokeWidth="1" strokeDasharray="4 6" />
+
+        {/* Connection lines from center to nodes */}
+        {nodes.map((n) => {
+          const rad = (n.angle * Math.PI) / 180;
+          const x = Math.cos(rad) * r;
+          const y = Math.sin(rad) * r;
+          return (
+            <line key={n.label} x1="0" y1="0" x2={x} y2={y}
+              stroke={n.color} strokeWidth="0.5" opacity="0.25" />
+          );
+        })}
+
+        {/* Orbital nodes */}
+        {nodes.map((n) => {
+          const rad = (n.angle * Math.PI) / 180;
+          const x = Math.cos(rad) * r;
+          const y = Math.sin(rad) * r;
+          return (
+            <g key={n.label} transform={`translate(${x},${y})`}>
+              <circle r="18" fill={`color-mix(in srgb, ${n.color} 12%, #0E1630)`}
+                stroke={n.color} strokeWidth="1" opacity="0.9" />
+              <text x="0" y="4" textAnchor="middle"
+                fontFamily="ui-monospace, monospace"
+                fontSize="6.5" fontWeight="700" fill={n.color}
+                letterSpacing="0.04em">
+                {n.label}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Center — Outcome */}
+        <circle cx="0" cy="0" r="30"
+          fill="color-mix(in srgb, #4F7CFF 15%, #0E1630)"
+          stroke="#4F7CFF" strokeWidth="1.5" />
+        <text x="0" y="-4" textAnchor="middle"
+          fontFamily="ui-monospace, monospace"
+          fontSize="8" fontWeight="800" fill="#6EA8FF" letterSpacing="0.06em">
+          OUTCOME
+        </text>
+        <text x="0" y="10" textAnchor="middle"
+          fontFamily="ui-monospace, monospace"
+          fontSize="6" fill="#4F7CFF" opacity="0.7" letterSpacing="0.06em">
+          CORE
+        </text>
+      </svg>
+
+      {/* Workflow strip below */}
+      <div style={{
+        display: "flex", alignItems: "center", gap: 4,
+        marginTop: 16, fontSize: 10, fontWeight: 700,
+        letterSpacing: "0.06em", color: "var(--text-muted)",
+        textTransform: "uppercase",
+      }}>
+        {["PLAN", "→", "ACT", "→", "MONITOR", "→", "VERIFY"].map((item, i) => (
+          <span key={i} style={{
+            color: item === "→" ? "var(--border-strong)"
+              : i === 0 ? "var(--indigo-400)"
+              : i === 2 ? "var(--green-400)"
+              : i === 4 ? "var(--amber-400)"
+              : "var(--violet-400)",
+            fontSize: item === "→" ? 12 : 10,
+          }}>
+            {item}
+          </span>
+        ))}
+      </div>
+
+      <div style={{
+        marginTop: 12, fontSize: 10, color: "var(--text-muted)",
+        textAlign: "center", maxWidth: 200, lineHeight: 1.5,
+      }}>
+        Powered by AWS Strands Agents + Amazon Bedrock
+      </div>
     </div>
   );
 }

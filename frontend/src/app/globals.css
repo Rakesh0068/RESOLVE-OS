@@ -1,103 +1,100 @@
-/* ── ResolveOS Design Tokens ───────────────────────────── */
+/* ── TAILWIND v4 — REQUIRED IMPORT ─────────────────────── */
+@import "tailwindcss";
 
-/* Color System — Neutral primary, accent used sparingly */
+/* ── ResolveOS Design Tokens — Midnight Blue Operations ── */
+
 :root {
-  /* Backgrounds — Neutral dark, not "AI blue" */
-  --bg-primary: #0a0a0d;
-  --bg-secondary: #141417;
-  --bg-tertiary: #1c1c21;
-  --bg-elevated: #202025;
-  --bg-hover: #27272c;
-  --bg-active: #2d2d33;
+  /* ── Backgrounds — Midnight Blue ───────────────────────── */
+  --bg-primary:   #050816;
+  --bg-secondary: #0A1024;
+  --bg-tertiary:  #0E1630;
+  --bg-elevated:  #121C3D;
+  --bg-hover:     #162040;
+  --bg-active:    #1a2448;
 
-  /* Borders — Subtle gray, no glowing */
-  --border-subtle: #27272c;
-  --border-default: #3f3f46;
-  --border-strong: #52525b;
+  /* ── Borders ─────────────────────────────────────────── */
+  --border-subtle:  #1a2448;
+  --border-default: #253060;
+  --border-strong:  #304080;
 
-  /* Text — Warm white, not harsh cyan */
-  --text-primary: #f0f0f0;
-  --text-secondary: #a1a1a8;
-  --text-tertiary: #717178;
-  --text-muted: #52525b;
+  /* ── Text ────────────────────────────────────────────── */
+  --text-primary:   #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-tertiary:  #64748B;
+  --text-muted:     #475569;
 
-  /* Semantic — Used sparingly for impact */
-  --green-500: #22c55e;
-  --green-400: #4ade80;
-  --green-900: #14532d;
-  --green-950: #0a2e17;
-  --amber-500: #f59e0b;
-  --amber-400: #fbbf24;
-  --amber-900: #78350f;
-  --amber-950: #451a03;
-  --red-500: #ef4444;
-  --red-400: #f87171;
-  --red-900: #7f1d1d;
-  --red-950: #450a0a;
-  /* Blue used ONLY for interaction/active, not everywhere */
-  --blue-500: #3b82f6;
-  --blue-400: #60a5fa;
-  --blue-900: #1e3a5f;
-  --blue-950: #172554;
+  /* ── Brand blues ─────────────────────────────────────── */
+  --blue-500:    #4F7CFF;
+  --blue-400:    #6EA8FF;
+  --blue-300:    #93C5FD;
+  --blue-600:    #3B65E8;
+  --blue-900:    #1e3a8a;
+  --blue-950:    #172554;
 
-  /* Radii — Not excessively rounded */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 10px;
-  --radius-xl: 14px;
+  /* ── Indigo / Violet ─────────────────────────────────── */
+  --indigo-500:  #6366F1;
+  --indigo-400:  #818CF8;
+  --violet-500:  #8B5CF6;
+  --violet-400:  #A78BFA;
+  --purple-500:  #A855F7;
+  --purple-400:  #C084FC;
 
-  /* Shadows — Subtle, not glowing */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+  /* ── Semantic ────────────────────────────────────────── */
+  --green-500:   #34D399;
+  --green-400:   #6EE7B7;
+  --green-900:   #064E3B;
+  --green-950:   #022c22;
+  --amber-500:   #FBBF24;
+  --amber-400:   #FCD34D;
+  --amber-900:   #78350F;
+  --amber-950:   #451A03;
+  --red-500:     #FB7185;
+  --red-400:     #FDA4AF;
+  --red-900:     #881337;
+  --red-950:     #4C0519;
 
-  /* Typography Scale */
-  --font-mono: ui-monospace, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  --font-sans: var(--font-geist-sans), system-ui, -apple-system, system-ui, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  /* ── Radii ───────────────────────────────────────────── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
 
-  /* Transitions — Fast, no easing drama */
-  --transition-fast: 150ms ease;
-  --transition-normal: 200ms ease;
+  /* ── Shadows ─────────────────────────────────────────── */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.5);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.6);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.7);
+  --shadow-glow: 0 0 20px rgba(79,124,255,0.15);
+
+  /* ── Typography ──────────────────────────────────────── */
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
+  --font-sans: "Geist", var(--font-geist-sans), system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+  /* ── Transitions ─────────────────────────────────────── */
+  --transition-fast:   100ms ease;
+  --transition-normal: 150ms ease;
+  --transition-slow:   250ms ease;
 }
 
-/* ── Animations — Only operational motion ──────────────── */
-
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes scaleIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
-
-/* Minimal, purposeful animations only */
-.animate-fade-in { animation: fadeIn 150ms ease-out; }
-.animate-slide-up { animation: slideUp 200ms ease-out; }
-.animate-slide-down { animation: slideDown 200ms ease-out; }
-.animate-scale-in { animation: scaleIn 150ms ease-out; }
-
-/* NO pulse-subtle, NO shimmer, NO decorative movement */
-.pulse-subtle { animation: none; } /* Disable decorative pulsing */
-
-/* ── Skeleton loading ─────────────────────────────────── */
-.skeleton {
-  background: linear-gradient(90deg, var(--bg-tertiary) 25%, var(--bg-hover) 50%, var(--bg-tertiary) 75%);
-  background-size: 200% 100%;
-  animation: none; /* No shimmer */
-  border-radius: var(--radius-md);
+/* ── Tailwind v4 custom theme integration ─────────────── */
+@theme {
+  --color-bg-primary:   #050816;
+  --color-bg-secondary: #0A1024;
+  --color-bg-elevated:  #121C3D;
+  --color-brand:        #4F7CFF;
+  --color-brand-light:  #6EA8FF;
+  --color-success:      #34D399;
+  --color-warning:      #FBBF24;
+  --color-danger:       #FB7185;
 }
 
-/* ── Scrollbar ────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--border-default); }
+/* ── Base ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 
-/* ── Focus ring ───────────────────────────────────────── */
-*:focus-visible {
-  outline: 2px solid var(--blue-500);
-  outline-offset: 2px;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
-
-/* ── Base resets ──────────────────────────────────────── */
-* { box-sizing: border-box; }
 
 body {
   background: var(--bg-primary);
@@ -105,8 +102,218 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
 }
 
-/* ── Transition utilities ─────────────────────────────── */
-.transition-colors { transition: color 0.15s, background-color 0.15s, border-color 0.15s; }
-.transition-all { transition: all 0.2s ease; }
+/* ── Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar          { width: 5px; height: 5px; }
+::-webkit-scrollbar-track    { background: transparent; }
+::-webkit-scrollbar-thumb    { background: var(--border-default); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+
+/* ── Focus ───────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--blue-500);
+  outline-offset: 2px;
+}
+
+/* ── Animations ──────────────────────────────────────── */
+@keyframes fadeIn   { from { opacity: 0; }                          to { opacity: 1; } }
+@keyframes slideUp  { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes spin     { from { transform: rotate(0deg); }             to { transform: rotate(360deg); } }
+@keyframes orbit    {
+  from { transform: rotate(0deg) translateX(var(--orbit-r, 80px)) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(var(--orbit-r, 80px)) rotate(-360deg); }
+}
+
+.animate-fade-in   { animation: fadeIn  200ms ease-out; }
+.animate-slide-up  { animation: slideUp 250ms ease-out; }
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+.animate-spin      { animation: spin 1s linear infinite; }
+.animate-orbit     { animation: orbit 6s linear infinite; }
+
+/* ── Typography helpers ───────────────────────────────── */
+.text-mono { font-family: var(--font-mono); }
+
+/* ── Card / Surface ──────────────────────────────────── */
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+.card-hover:hover {
+  border-color: var(--border-default);
+  background: var(--bg-hover);
+}
+
+/* ── Status indicators ───────────────────────────────── */
+.status-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-dot.green   { background: var(--green-500); box-shadow: 0 0 4px var(--green-500); }
+.status-dot.amber   { background: var(--amber-500); box-shadow: 0 0 4px var(--amber-500); }
+.status-dot.red     { background: var(--red-500);   box-shadow: 0 0 4px var(--red-500); }
+.status-dot.blue    { background: var(--blue-500);  box-shadow: 0 0 4px var(--blue-500); }
+.status-dot.muted   { background: var(--text-muted); }
+
+/* ── Risk badges ─────────────────────────────────────── */
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.badge-critical { background: color-mix(in srgb, var(--red-500) 15%, transparent);   color: var(--red-400);   border: 1px solid color-mix(in srgb, var(--red-500) 30%, transparent); }
+.badge-high     { background: color-mix(in srgb, var(--amber-500) 15%, transparent); color: var(--amber-400); border: 1px solid color-mix(in srgb, var(--amber-500) 30%, transparent); }
+.badge-medium   { background: color-mix(in srgb, var(--blue-500) 15%, transparent);  color: var(--blue-400);  border: 1px solid color-mix(in srgb, var(--blue-500) 30%, transparent); }
+.badge-low      { background: color-mix(in srgb, var(--green-500) 15%, transparent); color: var(--green-400); border: 1px solid color-mix(in srgb, var(--green-500) 30%, transparent); }
+.badge-resolved { background: color-mix(in srgb, var(--green-500) 10%, transparent); color: var(--green-400); border: 1px solid color-mix(in srgb, var(--green-500) 20%, transparent); }
+
+/* ── Button base ─────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px;
+  padding: 0 16px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  font-size: 13px; font-weight: 500;
+  border: none; cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  white-space: nowrap;
+}
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--blue-500);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) { background: var(--blue-400); }
+
+.btn-secondary {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+}
+.btn-secondary:hover:not(:disabled) { background: var(--bg-hover); border-color: var(--border-strong); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+.btn-ghost:hover:not(:disabled) { background: var(--bg-hover); color: var(--text-primary); }
+
+.btn-danger {
+  background: color-mix(in srgb, var(--red-500) 15%, transparent);
+  color: var(--red-400);
+  border: 1px solid color-mix(in srgb, var(--red-500) 30%, transparent);
+}
+.btn-danger:hover:not(:disabled) { background: color-mix(in srgb, var(--red-500) 25%, transparent); }
+
+/* ── Input ───────────────────────────────────────────── */
+.input {
+  height: 36px;
+  padding: 0 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  transition: border-color var(--transition-fast);
+  width: 100%;
+}
+.input::placeholder { color: var(--text-muted); }
+.input:focus { outline: none; border-color: var(--blue-500); }
+
+textarea.input { height: auto; padding: 10px 12px; resize: vertical; }
+
+/* ── Agent timeline ──────────────────────────────────── */
+.timeline-entry {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 12px;
+}
+.timeline-entry:last-child { border-bottom: none; }
+.timeline-agent {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--blue-400); white-space: nowrap;
+  min-width: 90px;
+}
+.timeline-time {
+  font-family: var(--font-mono);
+  font-size: 10px; color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ── Strands event chips ─────────────────────────────── */
+.event-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.event-chip.plan       { background: color-mix(in srgb,var(--indigo-500) 15%,transparent); color: var(--indigo-400); }
+.event-chip.investigate{ background: color-mix(in srgb,var(--blue-500) 15%,transparent);   color: var(--blue-400); }
+.event-chip.act        { background: color-mix(in srgb,var(--green-500) 15%,transparent);  color: var(--green-400); }
+.event-chip.verify     { background: color-mix(in srgb,var(--violet-500) 15%,transparent); color: var(--violet-400); }
+.event-chip.escalate   { background: color-mix(in srgb,var(--amber-500) 15%,transparent);  color: var(--amber-400); }
+.event-chip.replan     { background: color-mix(in srgb,var(--red-500) 15%,transparent);    color: var(--red-400); }
+
+/* ── Sidebar nav ─────────────────────────────────────── */
+.nav-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  font-size: 13px; color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+.nav-item:hover              { background: var(--bg-hover);   color: var(--text-primary); }
+.nav-item.active             { background: var(--bg-elevated); color: var(--text-primary); }
+.nav-item.active .nav-icon   { color: var(--blue-400); }
+
+/* ── Gradient text ───────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--blue-400), var(--indigo-400), var(--violet-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Glow effects — used sparingly ───────────────────── */
+.glow-blue   { box-shadow: 0 0 24px rgba(79,124,255,0.2); }
+.glow-green  { box-shadow: 0 0 24px rgba(52,211,153,0.2); }
+.glow-red    { box-shadow: 0 0 24px rgba(251,113,133,0.2); }
+
+/* ── Agent process graph ─────────────────────────────── */
+.process-node {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.process-node-circle {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 1.5px solid var(--border-default);
+  background: var(--bg-elevated);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  transition: all var(--transition-normal);
+}
+.process-node-circle.active  { border-color: var(--blue-500); background: color-mix(in srgb,var(--blue-500) 12%,transparent); color: var(--blue-400); box-shadow: 0 0 12px rgba(79,124,255,0.25); }
+.process-node-circle.done    { border-color: var(--green-500); background: color-mix(in srgb,var(--green-500) 10%,transparent); color: var(--green-400); }
+.process-node-circle.blocked { border-color: var(--amber-500); background: color-mix(in srgb,var(--amber-500) 10%,transparent); color: var(--amber-400); }
+.process-node-circle.failed  { border-color: var(--red-500);   background: color-mix(in srgb,var(--red-500) 10%,transparent);   color: var(--red-400); }
+.process-connector {
+  flex: 1; height: 1px;
+  background: var(--border-subtle);
+}
+.process-connector.active { background: var(--blue-500); opacity: 0.4; }
