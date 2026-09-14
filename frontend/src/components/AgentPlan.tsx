@@ -2,20 +2,12 @@
 
 import { PlanStep } from "@/types";
 
-const STEP_ICONS: Record<string, string> = {
-  pending: "[ ]",
-  executing: "[...]",
-  completed: "[OK]",
-  failed: "[X]",
-  skipped: "[-]",
-};
-
-const STEP_COLORS: Record<string, string> = {
-  pending: "text-text-secondary",
-  executing: "text-accent-blue",
-  completed: "text-accent-green",
-  failed: "text-accent-red",
-  skipped: "text-text-secondary",
+const STATUS_ICONS: Record<string, { icon: string; color: string }> = {
+  pending: { icon: "○", color: "text-text-secondary" },
+  executing: { icon: "◉", color: "text-accent-blue" },
+  completed: { icon: "✓", color: "text-accent-green" },
+  failed: { icon: "✕", color: "text-accent-red" },
+  skipped: { icon: "—", color: "text-text-secondary" },
 };
 
 export default function AgentPlan({ steps, replanCount }: { steps: PlanStep[]; replanCount: number }) {
@@ -23,17 +15,18 @@ export default function AgentPlan({ steps, replanCount }: { steps: PlanStep[]; r
   const total = steps.length;
 
   return (
-    <div className="bg-bg-secondary rounded-lg border border-bg-tertiary overflow-hidden">
-      <div className="px-4 py-3 border-b border-bg-tertiary bg-bg-tertiary/50 flex items-center justify-between">
-        <h3 className="font-semibold text-sm flex items-center gap-2">
-          <span className="text-accent-blue">[PLAN]</span>
-          Agent Plan
+    <div className="bg-bg-secondary rounded-xl border border-bg-tertiary overflow-hidden">
+      <div className="px-4 py-3 border-b border-bg-tertiary flex items-center justify-between">
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-text-secondary">
+          Current Plan
         </h3>
         <div className="flex items-center gap-3">
           {replanCount > 0 && (
-            <span className="text-xs text-accent-yellow">Replan #{replanCount}</span>
+            <span className="text-[10px] text-accent-yellow font-mono px-2 py-0.5 bg-accent-yellow/10 rounded">
+              Replan #{replanCount}
+            </span>
           )}
-          <span className="text-xs text-text-secondary">
+          <span className="text-xs text-text-secondary font-mono">
             {completed}/{total}
           </span>
         </div>
@@ -42,34 +35,45 @@ export default function AgentPlan({ steps, replanCount }: { steps: PlanStep[]; r
       {/* Progress bar */}
       <div className="h-1 bg-bg-tertiary">
         <div
-          className="h-1 bg-accent-blue transition-all duration-500"
+          className="h-1 bg-accent-blue rounded-full transition-all duration-700"
           style={{ width: `${total > 0 ? (completed / total) * 100 : 0}%` }}
         />
       </div>
 
       {/* Steps */}
       <div className="p-4 space-y-1">
-        {steps.map((step, i) => (
-          <div
-            key={step.id}
-            className={`flex items-start gap-3 py-1.5 ${STEP_COLORS[step.status]} ${
-              step.status === "executing" ? "bg-accent-blue/5 rounded px-2 -mx-2" : ""
-            }`}
-          >
-            <span className="font-mono text-xs mt-0.5 w-6 shrink-0">
-              {STEP_ICONS[step.status]}
-            </span>
-            <div className="flex-1 min-w-0">
-              <span className="text-sm">{step.description}</span>
+        {steps.map((step) => {
+          const config = STATUS_ICONS[step.status] || STATUS_ICONS.pending;
+          return (
+            <div
+              key={step.id}
+              className={`flex items-center gap-3 py-2 px-2 rounded-md transition-colors ${
+                step.status === "executing" ? "bg-accent-blue/5" : ""
+              }`}
+            >
+              <span className={`text-sm ${config.color} w-5 text-center`}>{config.icon}</span>
+              <span
+                className={`text-sm flex-1 ${
+                  step.status === "completed"
+                    ? "text-foreground/70"
+                    : step.status === "executing"
+                    ? "text-foreground font-medium"
+                    : "text-text-secondary"
+                }`}
+              >
+                {step.description}
+              </span>
               {step.requires_approval && (
-                <span className="ml-2 text-xs text-accent-yellow">[approval]</span>
+                <span className="text-[10px] text-accent-yellow font-mono px-1.5 py-0.5 bg-accent-yellow/10 rounded">
+                  approval
+                </span>
               )}
+              <span className="text-[10px] text-text-secondary font-mono uppercase w-16 text-right">
+                {step.step_type}
+              </span>
             </div>
-            <span className="text-xs text-text-secondary shrink-0 capitalize">
-              {step.step_type}
-            </span>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

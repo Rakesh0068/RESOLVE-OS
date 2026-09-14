@@ -27,15 +27,17 @@ export default function GoalInput({ onCreated }: { onCreated?: () => void }) {
     }
   };
 
-  const exampleGoals = [
+  const examples = [
     "The supplier says our tea leaves delivery will be late by 3 days. Make sure we dont run out of stock.",
     "We received an invoice that doesnt match our purchase order. Resolve this discrepancy.",
     "A customer is complaining about a delayed order. Handle this.",
   ];
 
   return (
-    <div className="bg-bg-secondary rounded-lg p-6 border border-bg-tertiary">
-      <h2 className="text-lg font-semibold mb-4">What needs to be resolved?</h2>
+    <div className="bg-bg-secondary rounded-xl border border-bg-tertiary p-6">
+      <h2 className="text-sm font-semibold uppercase tracking-widest text-text-secondary mb-4">
+        What outcome needs resolving?
+      </h2>
 
       <form onSubmit={handleSubmit} className="flex gap-3">
         <input
@@ -43,31 +45,28 @@ export default function GoalInput({ onCreated }: { onCreated?: () => void }) {
           value={goal}
           onChange={(e) => setGoal(e.target.value)}
           placeholder="Describe the outcome you need..."
-          className="flex-1 bg-bg-tertiary rounded-lg px-4 py-3 text-foreground placeholder:text-text-secondary border border-transparent focus:border-accent-blue focus:outline-none"
+          className="flex-1 bg-bg-tertiary rounded-lg px-4 py-3 text-foreground placeholder:text-text-secondary/60 border border-transparent focus:border-accent-blue focus:outline-none text-sm"
           disabled={loading}
         />
         <button
           type="submit"
           disabled={!goal.trim() || loading}
-          className="bg-accent-blue hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium px-6 py-3 rounded-lg transition-colors"
+          className="bg-accent-blue hover:bg-blue-600 disabled:opacity-40 disabled:cursor-not-allowed text-white font-medium px-6 py-3 rounded-lg transition-colors text-sm"
         >
           {loading ? "Starting..." : "Resolve"}
         </button>
       </form>
 
-      <div className="mt-4">
-        <p className="text-xs text-text-secondary mb-2">Try an example:</p>
-        <div className="flex flex-wrap gap-2">
-          {exampleGoals.map((example, i) => (
-            <button
-              key={i}
-              onClick={() => setGoal(example)}
-              className="text-xs bg-bg-tertiary hover:bg-gray-700 text-text-secondary px-3 py-1.5 rounded-full transition-colors"
-            >
-              {example.substring(0, 50)}...
-            </button>
-          ))}
-        </div>
+      <div className="mt-4 flex flex-wrap gap-2">
+        {examples.map((ex, i) => (
+          <button
+            key={i}
+            onClick={() => setGoal(ex)}
+            className="text-xs bg-bg-tertiary/50 hover:bg-bg-tertiary text-text-secondary px-3 py-1.5 rounded-full transition-colors border border-transparent hover:border-bg-tertiary"
+          >
+            {ex.substring(0, 45)}...
+          </button>
+        ))}
       </div>
     </div>
   );

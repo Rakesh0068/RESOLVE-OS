@@ -1,10 +1,12 @@
 "use client";
 
 import { Case } from "@/types";
-import OutcomeContract from "./OutcomeContract";
+import OutcomeContractCard from "./OutcomeContract";
 import AgentPlan from "./AgentPlan";
 import ActivityFeed from "./ActivityFeed";
 import ApprovalGate from "./ApprovalGate";
+import Pipeline from "./Pipeline";
+import AutonomyBudget from "./AutonomyBudget";
 
 interface CaseDetailProps {
   caseData: Case;
@@ -13,80 +15,127 @@ interface CaseDetailProps {
   onBack: () => void;
 }
 
-const STATUS_BADGE: Record<string, { bg: string; text: string; label: string }> = {
-  open: { bg: "bg-accent-blue/20", text: "text-accent-blue", label: "Open" },
-  investigating: { bg: "bg-accent-blue/20", text: "text-accent-blue", label: "Investigating" },
-  planning: { bg: "bg-accent-purple/20", text: "text-accent-purple", label: "Planning" },
-  awaiting_approval: { bg: "bg-accent-red/20", text: "text-accent-red", label: "Awaiting Approval" },
-  executing: { bg: "bg-accent-yellow/20", text: "text-accent-yellow", label: "Executing" },
-  monitoring: { bg: "bg-accent-yellow/20", text: "text-accent-yellow", label: "Monitoring" },
-  resolved: { bg: "bg-accent-green/20", text: "text-accent-green", label: "Resolved" },
-  escalated: { bg: "bg-accent-red/20", text: "text-accent-red", label: "Escalated" },
+const STATUS_LABELS: Record<string, string> = {
+  open: "OPEN",
+  investigating: "INVESTIGATING",
+  planning: "PLANNING",
+  awaiting_approval: "DECISION REQUIRED",
+  executing: "EXECUTING",
+  monitoring: "MONITORING",
+  resolved: "RESOLVED",
+  escalated: "ESCALATED",
 };
 
 export default function CaseDetail({ caseData, onApprove, onReject, onBack }: CaseDetailProps) {
-  const badge = STATUS_BADGE[caseData.status] || STATUS_BADGE.open;
   const pendingApproval = caseData.pending_approvals?.find((a) => a.status === "pending");
+  const isResolved = caseData.status === "resolved";
+  const statusLabel = STATUS_LABELS[caseData.status] || caseData.status.toUpperCase();
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-bg-tertiary bg-bg-secondary/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center gap-4">
-          <button onClick={onBack} className="text-text-secondary hover:text-foreground transition-colors">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <div className="flex-1">
-            <div className="flex items-center gap-3">
-              <h1 className="text-lg font-bold">{caseData.title}</h1>
-              <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${badge.bg} ${badge.text}`}>
-                {badge.label}
+    <div className="h-full overflow-y-auto">
+      <div className="max-w-6xl mx-auto px-8 py-8 space-y-8">
+        {/* Header */}
+        <div className="flex items-start justify-between">
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <button
+                onClick={onBack}
+                className="text-text-secondary hover:text-foreground transition-colors text-sm"
+              >
+                Back
+              </button>
+              <span className="text-text-secondary">/</span>
+              <span className="text-xs font-mono text-text-secondary">{caseData.id}</span>
+            </div>
+            <h1 className="text-2xl font-bold tracking-tight mb-1">{caseData.title}</h1>
+            <div className="flex items-center gap-4 text-sm text-text-secondary">
+              <span className={`font-medium ${
+                caseData.status === "resolved" ? "text-accent-green" :
+                caseData.status === "awaiting_approval" ? "text-accent-red" :
+                caseData.status === "monitoring" ? "text-accent-yellow" :
+                "text-accent-blue"
+              }`}>
+                {statusLabel}
               </span>
+              {caseData.risk_level > 0 && (
+                <span className={`font-mono font-bold ${
+                  caseData.risk_level > 0.7 ? "text-accent-red" :
+                  caseData.risk_level > 0.4 ? "text-accent-yellow" :
+                  "text-accent-green"
+                }`}>
+                  {Math.round(caseData.risk_level * 100)}% risk
+                </span>
+              )}
             </div>
-            <p className="text-xs text-text-secondary mt-0.5">{caseData.id}</p>
           </div>
-          {caseData.risk_level > 0 && (
-            <div className={`text-right ${caseData.risk_level > 0.7 ? "text-accent-red" : "text-accent-yellow"}`}>
-              <div className="text-2xl font-bold">{Math.round(caseData.risk_level * 100)}%</div>
-              <div className="text-xs text-text-secondary">Risk</div>
-            </div>
-          )}
         </div>
-      </header>
 
-      <main className="max-w-6xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          {/* Left Column - Contract + Plan */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Outcome Contract */}
+        {/* Pipeline */}
+        {caseData.current_plan && caseData.current_plan.length > 0 && (
+          <Pipeline steps={caseData.current_plan} status={caseData.status} />
+        )}
+
+        {/* Resolution Summary */}
+        {isResolved && (
+          <div className="bg-accent-green/5 border border-accent-green/20 rounded-xl p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-accent-green text-2xl">✓</span>
+              <div>
+                <h2 className="text-lg font-bold text-accent-green">Outcome Resolved</h2>
+                <p className="text-sm text-text-secondary">Goal achieved successfully</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-4 gap-4 text-center">
+              <div>
+                <div className="text-2xl font-bold">{caseData.replan_count}</div>
+                <div className="text-xs text-text-secondary">Replans</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold">1</div>
+                <div className="text-xs text-text-secondary">Human decisions</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold font-mono">
+                  {caseData.current_plan?.filter((s) => s.status === "completed").length || 0}
+                </div>
+                <div className="text-xs text-text-secondary">Actions taken</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold font-mono">0</div>
+                <div className="text-xs text-text-secondary">Unresolved issues</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Approval Gate */}
+        {pendingApproval && (
+          <ApprovalGate approval={pendingApproval} onApprove={onApprove} onReject={onReject} />
+        )}
+
+        {/* Main content grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left column */}
+          <div className="lg:col-span-1 space-y-6">
             {caseData.outcome_contract && (
-              <OutcomeContract contract={caseData.outcome_contract} />
+              <OutcomeContractCard contract={caseData.outcome_contract} />
             )}
+            <AutonomyBudget
+              budget={caseData.outcome_contract?.budget || "N/A"}
+              maxReplans={caseData.outcome_contract?.max_replans || 3}
+              replanCount={caseData.replan_count}
+            />
+          </div>
 
-            {/* Agent Plan */}
+          {/* Right column */}
+          <div className="lg:col-span-2 space-y-6">
             {caseData.current_plan && caseData.current_plan.length > 0 && (
               <AgentPlan steps={caseData.current_plan} replanCount={caseData.replan_count} />
             )}
-          </div>
-
-          {/* Right Column - Activity + Approval */}
-          <div className="lg:col-span-3 space-y-6">
-            {/* Approval Gate */}
-            {pendingApproval && (
-              <ApprovalGate
-                approval={pendingApproval}
-                onApprove={onApprove}
-                onReject={onReject}
-              />
-            )}
-
-            {/* Activity Feed */}
             <ActivityFeed events={caseData.activity_log || []} />
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
