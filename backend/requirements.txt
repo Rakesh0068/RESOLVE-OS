@@ -1,9 +1,30 @@
-fastapi>=0.115.0
-uvicorn[standard]>=0.32.0
-strands-agents>=1.0.0
-strands-agents-tools>=0.1.0
-pydantic>=2.10.0
-aiosqlite>=0.20.0
-websockets>=13.0
-python-multipart>=0.0.18
-httpx>=0.28.0
+# ResolveOS Backend Dependencies
+# Install: pip install -r backend/requirements.txt
+
+# ── Web Framework ──────────────────────────────────────
+fastapi==0.141.1
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+sse-starlette==2.3.6
+
+# ── AWS Strands Agents SDK (CORE REQUIREMENT) ───────────
+# This is the engine that makes ResolveOS autonomous.
+# All specialized agents (Planner, Investigator, Action, Verification)
+# are real strands.Agent instances backed by Amazon Bedrock.
+strands-agents==1.55.1
+strands-agents-tools==0.8.8
+
+# ── AWS ────────────────────────────────────────────────
+boto3==1.43.93
+
+# ── Data / Validation ──────────────────────────────────
+pydantic==2.13.5
+aiosqlite==0.21.0
+
+# ── HTTP ───────────────────────────────────────────────
+httpx==0.28.1
+websockets==15.0.1
+
+# ── Testing ────────────────────────────────────────────
+pytest==9.1.1
+pytest-asyncio==1.4.0

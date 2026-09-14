@@ -31,52 +31,72 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero */}
+      {/* Hero — Product-driven layout per §5-6 */}
       <section className="pt-32 pb-24 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--blue-950)] border border-[var(--blue-500)]/20 text-[var(--blue-400)] text-xs font-medium mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--blue-400)] animate-pulse-subtle" />
-            Autonomous operations for your business
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* LEFT: Operational copy */}
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--blue-950)] border border-[var(--blue-500)]/20 text-[var(--blue-400)] text-xs font-medium mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--blue-400)] animate-pulse-subtle" />
+              Autonomous operations
+            </div>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight leading-[1.25] mb-4">
+              Give ResolveOS an outcome
+            </h1>
+            <p className="text-base md:text-lg text-[var(--text-secondary)] leading-relaxed mb-6">
+              ResolveOS investigates operational problems, takes permitted actions, monitors what happens, and escalates only when a decision actually requires you.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link href="/signup" className="flex-1 h-10 px-4 bg-[var(--blue-500)] hover:bg-[var(--blue-400)] text-white font-medium rounded-md transition-colors text-center">
+                Resolve this
+              </Link>
+              <a href="#how-it-works" className="h-10 border border-[var(--border-subtle)] hover:border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium rounded-md transition-colors text-center">
+                How it works
+              </a>
+            </div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
-            Don&apos;t manage tasks.<br />
-            <span className="text-[var(--text-tertiary)]">Give ResolveOS outcomes.</span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-10 leading-relaxed">
-            Turn operational problems into autonomous workflows. ResolveOS investigates, acts, monitors, verifies, and escalates only when necessary.
-          </p>
-
-          <div className="flex items-center justify-center gap-4">
-            <Link href="/signup" className="h-12 px-8 bg-[var(--blue-500)] hover:bg-[var(--blue-400)] text-white font-medium rounded-[var(--radius-md)] transition-colors flex items-center gap-2">
-              Start resolving
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-            </Link>
-            <a href="#how-it-works" className="h-12 px-8 border border-[var(--border-subtle)] hover:border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium rounded-[var(--radius-md)] transition-colors">
-              See how it works
-            </a>
+          {/* RIGHT: Actual product preview per §6 */}
+          <div className="relative">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--bg-secondary)] rounded-[var(--radius-lg)] overflow-hidden opacity-80">
+              <svg className="w-full h-full" viewBox="0 0 200 160" fill="none">
+                <rect width="200" height="160" rx="12" fill="var(--bg-tertiary)" />
+                <rect width="80" height="40" x="60" y="60" rx="6" fill="var(--blue-500)" />
+                <text x="100" y="95" text-anchor="middle" font-family="var(--font-geist-sans)" font-size="11" fill="var(--text-primary)">Case</text>
+                <text x="100" y="110" text-anchor="middle" font-family="var(--font-geist-sans)" font-size="11" fill="var(--text-secondary)">Panel</text>
+              </svg>
+            </div>
+            <div className="absolute inset-0 bg-[var(--bg-primary)] rounded-[var(--radius-lg)] overflow-hidden">
+              <div className="absolute top-4 left-4">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--bg-tertiary)] border border-[var(--border-subtle)]">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[var(--amber-500)]" />
+                  <span className="text-sm text-[var(--text-secondary)]">12m ago</span>
+                </div>
+                <div className="mt-2 text-xs text-[var(--text-muted)]">Inventory risk detected</div>
+              </div>
+              <div className="absolute bottom-4 right-4">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--bg-tertiary)] border border-[var(--border-subtle)]">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[var(--green-500)]" />
+                  <span className="text-sm text-[var(--text-secondary)]">Monitoring</span>
+                </div>
+                <div className="mt-2 text-xs text-[var(--text-muted)]">Stock safe</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section id="how-it-works" className="py-24 px-6 border-t border-[var(--border-subtle)]">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">How it works</h2>
-          <p className="text-[var(--text-secondary)] text-center max-w-lg mx-auto mb-16">Give an outcome. ResolveOS handles the operational workflow.</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { step: "01", title: "Give an outcome", desc: "Tell ResolveOS what you need. Not how to do it.", icon: "◉" },
-              { step: "02", title: "ResolveOS investigates", desc: "The agent analyzes your business, checks inventory, contacts suppliers, and evaluates options.", icon: "◎" },
-              { step: "03", title: "ResolveOS acts", desc: "Within your policies, it executes actions. It asks you only when your decision matters.", icon: "⬡" },
-            ].map((item) => (
-              <div key={item.step} className="bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-8">
-                <div className="text-4xl mb-4 opacity-30">{item.icon}</div>
-                <div className="text-xs text-[var(--text-muted)] font-mono mb-2">STEP {item.step}</div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.desc}</p>
+      {/* How it works — condensed per §7 */}
+      <section id="how-it-works" className="py-16 px-6 border-t border-[var(--border-subtle)]">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-xl font-bold text-center mb-3">How it works</h2>
+          <p className="text-[var(--text-secondary)] text-center mb-8">Give an outcome. ResolveOS handles the operational workflow.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            {[{"step": "01", "title": "Give outcome", "desc": "Tell ResolveOS what you need. Not how to do it."}, {"step": "02", "title": "Agent investigates", "desc": "The agent analyzes your business, checks inventory, contacts suppliers, evaluates options."}, {"step": "03", "title": "Agent acts", "desc": "Within your policies, it executes actions. It asks you only when your decision matters."}].map((item) => (
+              <div key={item.step} className="bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-lg p-5 text-center">
+                <div className="text-3xl mb-3 opacity-40">{item.step}</div>
+                <h3 className="font-semibold mb-2">{item.title}</h3>
+                <p className="text-sm text-[var(--text-secondary)]">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -84,55 +104,48 @@ export default function LandingPage() {
       </section>
 
       {/* Outcome vs Task */}
-      <section className="py-24 px-6 border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)]">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">Outcome &gt; Task</h2>
-          <p className="text-[var(--text-secondary)] text-center max-w-lg mx-auto mb-16">Traditional task management makes you the coordinator. ResolveOS makes you the decision-maker.</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-8">
-              <div className="text-xs text-[var(--red-400)] font-semibold uppercase tracking-wider mb-4">Traditional</div>
-              <div className="space-y-3">
-                {["Create task", "Assign task", "Track task", "Follow up", "Check result"].map((t, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm text-[var(--text-tertiary)]">
-                    <span className="w-5 h-5 rounded border border-[var(--border-subtle)] flex items-center justify-center text-[10px]">{i + 1}</span>
-                    {t}
-                  </div>
-                ))}
-              </div>
+      <section className="py-16 px-6 border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)]">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-xl font-bold text-center mb-3">Outcome > Task</h2>
+          <p className="text-[var(--text-secondary)] text-center mb-8">Traditional task management makes you the coordinator. ResolveOS makes you the decision-maker.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <div className="bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-lg p-6">
+              <div className="text-xs font-semibold uppercase tracking-wider text-[var(--red-400)] mb-3">Traditional</div>
+              <ul className="text-sm text-[var(--text-tertiary)] space-y-2">
+                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--border-subtle)] flex items-center justify-center text-[8px]">1</span> Create task</li>
+                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--border-subtle)] flex items-center justify-center text-[8px]">2</span> Assign task</li>
+                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--border-subtle)] flex items-center justify-center text-[8px]">3</span> Track task</li>
+                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--border-subtle)] flex items-center justify-center text-[8px]">4</span> Follow up</li>
+                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--border-subtle)] flex items-center justify-center text-[8px]">5</span> Check result</li>
+              </ul>
             </div>
-            <div className="bg-[var(--bg-primary)] border border-[var(--green-500)]/20 rounded-[var(--radius-lg)] p-8">
-              <div className="text-xs text-[var(--green-400)] font-semibold uppercase tracking-wider mb-4">ResolveOS</div>
-              <div className="space-y-3">
-                {["Give outcome", "Agent handles workflow", "Agent monitors", "Agent verifies", "Human intervenes only when needed"].map((t, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm text-[var(--text-primary)]">
-                    <span className="w-5 h-5 rounded bg-[var(--green-500)]/10 border border-[var(--green-500)]/20 flex items-center justify-center text-[var(--green-400)] text-[10px]">✓</span>
-                    {t}
-                  </div>
-                ))}
-              </div>
+            <div className="bg-[var(--bg-primary)] border border-[var(--green-500)]/20 rounded-lg p-6">
+              <div className="text-xs font-semibold uppercase tracking-wider text-[var(--green-400)] mb-3">ResolveOS</div>
+              <ul className="text-sm text-[var(--text-primary)] space-y-2">
+                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--green-500)]/10 border border-[var(--green-500)]/20 flex items-center justify-center text-[var(--green-400)] text-[8px]">✓</span> Give outcome</li>
+                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--green-500)]/10 border border-[var(--green-500)]/20 flex items-center justify-center text-[var(--green-400)] text-[8px]">✓</span> Agent handles workflow</li>
+                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--green-500)]/10 border border-[var(--green-500)]/20 flex items-center justify-center text-[var(--green-400)] text-[8px]">✓</span> Agent monitors</li>
+                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--green-500)]/10 border border-[var(--green-500)]/20 flex items-center justify-center text-[var(--green-400)] text-[8px]">✓</span> Agent verifies</li>
+                <li className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[var(--green-500)]/10 border border-[var(--green-500)]/20 flex items-center justify-center text-[var(--green-400)] text-[8px]">✓</span> Human intervenes only when needed</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="py-24 px-6 border-t border-[var(--border-subtle)]">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-16">Built for real operations</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: "Autonomy Budget", desc: "Control exactly how much freedom ResolveOS has. Set spending limits, action caps, and risk thresholds.", icon: "◇" },
-              { title: "Live Agent Timeline", desc: "Watch the agent work in real-time. Every investigation, decision, and action is visible.", icon: "≡" },
-              { title: "Replanning", desc: "When plans fail, ResolveOS adapts. Automatic replanning with bounded retries.", icon: "↻" },
-              { title: "Human Gates", desc: "Important decisions require your approval. The agent never acts beyond your configured limits.", icon: "⬡" },
-              { title: "Verification", desc: "Action is not resolution. ResolveOS verifies outcomes before marking cases complete.", icon: "✓" },
-              { title: "Business Memory", desc: "ResolveOS learns your preferences. Faster decisions over time based on your history.", icon: "△" },
-            ].map((f) => (
-              <div key={f.title} className="bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-6">
-                <div className="text-2xl mb-3 opacity-40">{f.icon}</div>
-                <h3 className="font-semibold mb-2">{f.title}</h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{f.desc}</p>
+      {/* Key sections as compact info, not feature cards */}
+      <section className="py-16 px-6 border-t border-[var(--border-subtle)]">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-xl font-bold text-center mb-4">What ResolveOS handles</h2>
+          <p className="text-[var(--text-secondary)] text-center mb-6">Built for real operations</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[{"title": "Stockout prevention", "desc": "Detects inventory shortage risk, compares suppliers, recommends action before stockout occurs"}, {"title": "Invoice discrepancy", "desc": "Identifies PO mismatches, contacts suppliers, processes corrections within policy limits"}, {"title": "Decision gates", "desc": "Pauses for approval when actions exceed autonomous limits (e.g., ₹10,000 purchase limit)"}, {"title": "Monitoring", "desc": "Tracks deliveries, supplier delays, risk levels. Escalates only when outcome threatened"}]} .map((f) => (
+              <div key={f.title} className="bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-lg p-5 flex items-start gap-3">
+                <div className="w-3 h-3 rounded-full flex-shrink-0">{f.title.includes("Stockout") ? "⚠" : f.title.includes("Invoice") ? "📄" : f.title.includes("Decision") ? "🔒" : "👁"}</div>
+                <div>
+                  <h3 className="font-medium mb-1">{f.title}</h3>
+                  <p className="text-sm text-[var(--text-secondary)]">{f.desc}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -140,19 +153,19 @@ export default function LandingPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 border-t border-[var(--border-subtle)]">
+      <section className="py-16 px-6 border-t border-[var(--border-subtle)]">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to resolve?</h2>
-          <p className="text-[var(--text-secondary)] mb-8">Give ResolveOS an outcome. It handles the work.</p>
-          <Link href="/signup" className="inline-flex h-12 px-8 bg-[var(--blue-500)] hover:bg-[var(--blue-400)] text-white font-medium rounded-[var(--radius-md)] transition-colors items-center gap-2">
+          <h2 className="text-2xl font-bold mb-3">Ready to resolve?</h2>
+          <p className="text-[var(--text-secondary)] mb-6">Give ResolveOS an outcome. It handles the work.</p>
+          <Link href="/signup" className="inline-flex h-10 px-6 bg-[var(--blue-500)] hover:bg-[var(--blue-400)] text-white font-medium rounded-md transition-colors items-center gap-2">
             Give ResolveOS an outcome
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
           </Link>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[var(--border-subtle)] py-8 px-6">
+      <footer className="border-t border-[var(--border-subtle)] py-6 px-6">
         <div className="max-w-6xl mx-auto flex items-center justify-between text-xs text-[var(--text-muted)]">
           <span>ResolveOS</span>
           <span>The Autonomous Operations Agent</span>

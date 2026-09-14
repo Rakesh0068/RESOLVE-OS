@@ -24,17 +24,41 @@ class BusinessMemory:
         return amount <= self.policies["max_autonomous_purchase"]
 
     def requires_approval(self, action_type: str, details: dict = None) -> bool:
-        """Determine if an action requires human approval."""
-        if action_type == "purchase_order" and details:
-            amount = details.get("total_cost", 0)
+        """Determine if an action requires human approval.
+        
+        Policy rules (deterministic — NOT LLM-evaluated):
+        - Any purchase over autonomous limit requires approval
+        - All external communications (send_email) require approval
+        - Supplier changes always require approval
+        - Refunds over max_auto_refund require approval
+        - Irreversible actions require approval
+        """
+        details = details or {}
+
+        # Large purchases
+        if action_type in ("purchase_order", "create_purchase_order"):
+            amount = details.get("total_cost", 0) or details.get("amount", 0)
             if not self.can_autonomously_purchase(amount):
                 return True
+
+        # External communications always require approval
+        if action_type in ("send_email", "external_communication", "contact_supplier"):
+            return True
+
+        # Supplier changes
         if action_type == "change_supplier":
             return self.policies.get("never_change_supplier_without_approval", True)
-        if action_type == "refund" and details:
+
+        # Refunds
+        if action_type == "refund":
             amount = details.get("amount", 0)
             if amount > self.policies.get("max_auto_refund", 5000):
                 return True
+
+        # Irreversible actions
+        if action_type in ("cancel_order", "delete_record", "emergency_purchase_order"):
+            return True
+
         return False
 
     def get_preferred_supplier(self, product_category: str = None) -> str:
