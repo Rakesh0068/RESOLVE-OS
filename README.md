@@ -423,7 +423,7 @@ RESOLVE-OS/
 
 ---
 
-## AWS Services in Use
+## AWS Services in Use................
 
 | Service | Purpose | Why it's needed |
 |---------|---------|-----------------|
